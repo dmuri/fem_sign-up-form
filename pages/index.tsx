@@ -1,4 +1,4 @@
-import FormComponent from "@/components/formgpt";
+import FormComponent from "@/components/FormComponent";
 
 export default function Home() {
   return (
