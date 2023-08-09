@@ -1,6 +1,7 @@
+import Image from 'next/image'
 import React, { useState } from 'react';
+import Confetti from 'react-dom-confetti';
 
-// 1. Define TypeScript Interfaces
 interface FormData {
     firstName: string;
     lastName: string;
@@ -25,6 +26,20 @@ const FormComponent: React.FC = () => {
     });
 
     const [errors, setErrors] = useState<ErrorMessages>({});
+    const [confettiActive, setConfettiActive] = useState(false);
+    const config = {
+        angle: 90,
+        spread: 360,
+        startVelocity: 40,
+        elementCount: 70,
+        dragFriction: 0.12,
+        duration: 3000,
+        stagger: 3,
+        width: "10px",
+        height: "10px",
+        perspective: "1000px",
+        colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -43,61 +58,82 @@ const FormComponent: React.FC = () => {
         setErrors(currentErrors);
 
         if (Object.keys(currentErrors).length === 0) {
-            console.log('Form data submitted:', formData);
-            console.log("you did it")
+            setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: ''
+                },
+
+            )
+            setConfettiActive(true);
+            setTimeout(() => setConfettiActive(false), 2000);
         }
     }
 
     return (
         <form className="flex flex-col gap-5  bg-white p-12 rounded-xl h-full" onSubmit={handleSubmit} noValidate>
             <div className="w-full">
+                <div className="flex  justify-between items-center  w-full rounded-md border-[1px] border-grayish-blue-neutral">
                 <input
                     type="text"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
                     placeholder="First Name"
-                    className="outline-1 w-full py-4 px-4 rounded-md border-[1px] border-grayish-blue-neutral"
+                    className="outline-1 w-full py-4 px-4 rounded-md "
                 />
-                {errors.firstName ? <div className="italic text-[12px] text-red-primary text-right">{errors.firstName}</div> : <div className="hidden"></div>}
+                    {errors.firstName && <img className="mr-4 h-7 w-7" src="images/icon-error.svg" /> }
+                </div>
+                {errors.firstName ? <div className="italic text-[12px] text-red-primary text-right"> {errors.firstName} </div> : <div className="hidden"></div>}
             </div>
             <div>
-                <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="outline-1 w-full py-4 px-4 rounded-md border-[1px] border-grayish-blue-neutral"
-                    placeholder="Last Name"
-                />
+                <div className="flex  justify-between items-center  w-full rounded-md border-[1px] border-grayish-blue-neutral">
+                    <input
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        placeholder="Last Name"
+                        className="outline-1 w-full py-4 px-4 rounded-md "
+                    />
+                    {errors.email && <img className="mr-4 h-7 w-7" src="images/icon-error.svg" /> }
+                </div>
                 {errors.lastName ? <div className="italic text-[12px] text-red-primary text-right">{errors.lastName}</div> : <div className="hidden"></div>}
             </div>
             <div>
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Email Address"
-                    className="outline-1 w-full py-4 px-4 rounded-md border-[1px] border-grayish-blue-neutral"
-                />
+                <div className="flex  justify-between items-center  w-full rounded-md border-[1px] border-grayish-blue-neutral">
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Email"
+                        className="outline-1 w-full py-4 px-4 rounded-md "
+                    />
+                    {errors.email && <img className="mr-4 h-7 w-7" src="images/icon-error.svg" /> }
+                </div>
                 {errors.email ? <div className="italic text-[12px] text-red-primary text-right">{errors.email}</div> : <div className="hidden"></div>}
             </div>
             <div>
 
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="Password"
-                    className="outline-1 w-full py-4 px-4 rounded-md border-[1px] border-grayish-blue-neutral"
-                />
+                <div className="flex  justify-between items-center  w-full rounded-md border-[1px] border-grayish-blue-neutral">
+                    <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        placeholder="Password"
+                        className="outline-1 w-full py-4 px-4 rounded-md "
+                    />
+                    {errors.password && <img className="mr-4 h-7 w-7" src="images/icon-error.svg" /> }
+                </div>
                 {errors.password ? <div className="italic text-[12px] text-red-primary text-right">{errors.password}</div> : <div className="hidden"></div>}
             </div>
 
             <button className="text-white bg-green-primary py-5 rounded-lg font-semibold" type="submit">CLAIM YOUR FREE TRIAL</button>
             <p className="text-grayish-blue-neutral text-xs text-center">By click the button, you are agreeing to our <span className="font-bold text-red-primary">Terms and Services</span></p>
+            <Confetti active={confettiActive} config={config}/>
         </form>
     );
 }

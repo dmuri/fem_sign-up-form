@@ -6,9 +6,11 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+
   theme: {
+
     extend: {
-      colors: {
+            colors: {
         'red-primary': '#f54545',
         'green-primary': '#4edc91',
         'blue-accent': '#6d7aa8',
@@ -16,9 +18,7 @@ const config: Config = {
         'grayish-blue-neutral': '#c5c9df'
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+              'image': 'url("../public/images/bg-intro-desktop.png")',
       },
     },
   },

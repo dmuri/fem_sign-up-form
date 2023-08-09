@@ -3,7 +3,7 @@ import FormComponent from "@/components/FormComponent";
 export default function Home() {
   return (
       <>
-        <div className="grid min-h-screen place-content-center">
+        <div className="grid min-h-screen place-content-center bg-image">
           <div className="grid md:grid-cols-[50%_50%] gap-8 min-h-[600px] max-w-[1150px] ">
               <div className="flex flex-col p-8 gap-8 place-content-center  max-w-[600px] text-center md:text-left md:mb-18">
                   <h1 className="text-5xl font-bold text-white">Learn to code by watching others</h1>
