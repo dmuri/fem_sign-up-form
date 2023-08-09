@@ -18,7 +18,7 @@ const config: Config = {
         'grayish-blue-neutral': '#c5c9df'
       },
       backgroundImage: {
-              'image': 'url("../public/images/bg-intro-desktop.png")',
+              'image': 'url("/images/bg-intro-desktop.png")',
       },
     },
   },
